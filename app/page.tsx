@@ -1,6 +1,6 @@
 "use client";
 import { signIn, signOut } from "next-auth/react";
-import { redirect } from "next/dist/server/api-utils";
+import SpoToolyLogo from "@/app/ui/SpoTooly-logo";
 
 export default function Page() {
   const handleLogin = () => {
@@ -9,22 +9,20 @@ export default function Page() {
 
   const handleLogout = () => {
     signOut();
-  }
+  };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-700">
-      <button
-        onClick={handleLogin}
-        className="px-6 py-3 text-white bg-green-500 rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition duration-300 ease-in-out transform hover:scale-105"
-      >
-        Connect
-      </button>
-      <button
-        onClick={handleLogout}
-        className="px-6 py-3 text-white bg-green-500 rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition duration-300 ease-in-out transform hover:scale-105"
-      >
-        Disconnect
-      </button>
+ <div className="min-h-screen flex flex-col item-center bg-gray-800 relative">
+      <header className="p-4 flex item-center justify-center">
+        <SpoToolyLogo />
+      </header>
+      <main className="flex-grow flex items-center justify-center">
+        <div className="flex-col flex space-y-4">
+          <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded w-80" onClick={() => console.log('Button 1 clicked')}>
+            Connect to Spotify
+          </button>
+        </div>
+      </main>
     </div>
   );
 }

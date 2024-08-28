@@ -18,7 +18,7 @@ export default function Page() {
       </header>
       <main className="flex-grow flex items-center justify-center">
         <div className="flex-col flex space-y-4">
-          <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded w-80" onClick={() => console.log('Button 1 clicked')}>
+          <button onClick={handleLogin} className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded w-80" >
             Connect to Spotify
           </button>
         </div>

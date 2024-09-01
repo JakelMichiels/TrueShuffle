@@ -18,7 +18,11 @@ const links = [
   { name: "Looper", href: "/home/looper", icon: LooperIcon },
 ];
 
-export default function NavLinks() {
+interface NavProps {
+  isHovered: boolean;
+}
+
+export default function NavLinks({ isHovered }: NavProps) {
   const pathname = usePathname();
   return (
     <>
@@ -29,16 +33,25 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-400 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3",
+              "flex h-[48px] w-full items-center justify-start gap-2 p-3 text-sm font-medium hover:bg-gray-300 md:p-2 md:px-3",
               {
-                "bg-sky-100 text-white-600": pathname === link.href,
+                "bg-grey-100": pathname === link.href,
               },
-              {"text-black": pathname !== link.href }
-
+              { "text-black": pathname !== link.href }
             )}
           >
-            <LinkIcon className="w-6 stroke-1 " />
-            <p className="hidden md:block">{link.name}</p>
+            <div className="flex flex-row items-center">
+              <LinkIcon className=" w-6 stroke-1 " />
+              <p className="hidden md:block">
+                <span
+                  className={
+                    "ml-2 overflow-hidden md:inline ml-2 opacity-0 transition-opacity duration-500 group-hover:w-auto group-hover:opacity-100"
+                  }
+                >
+                  {isHovered ? link.name : ""}
+                </span>
+              </p>
+            </div>
           </Link>
         );
       })}

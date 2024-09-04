@@ -1,7 +1,12 @@
+
+import CurrentlyPlaying from "@/app/ui/home/currentlyPlaying"
+
 export default function Page() {
-  return (
-    <div>
-      <p>home</p>
-    </div>
+
+   return (
+      <div>
+       <CurrentlyPlaying />
+      </div>
   );
 }
+

@@ -3,45 +3,45 @@ import { JWT } from "next-auth/jwt";
 
 import SpotifyProvider from "next-auth/providers/spotify";
 
-// async function refreshAccessToken(token: JWT): Promise<JWT> {
-//   try {
-//     const url = "https://accounts.spotify.com/api/token";
-//     const basicAuth = Buffer.from(
-//       `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
-//     ).toString("base64");
+async function refreshAccessToken(token: JWT): Promise<JWT> {
+  try {
+    const url = "https://accounts.spotify.com/api/token";
+    const basicAuth = Buffer.from(
+      `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
+    ).toString("base64");
 
-//     const response = await fetch(url, {
-//       method: "POST",
-//       headers: {
-//         Authorization: `Basic ${basicAuth}`,
-//         "Content-Type": "application/x-www-form-urlencoded",
-//       },
-//       body: new URLSearchParams({
-//         grant_type: "refresh_token",
-//         refresh_token: token.refreshToken as string,
-//       }),
-//     });
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Basic ${basicAuth}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        grant_type: "refresh_token",
+        refresh_token: token.refreshToken as string,
+      }),
+    });
 
-//     const refreshedTokens = await response.json();
+    const refreshedTokens = await response.json();
 
-//     if (!response.ok) {
-//       throw refreshedTokens;
-//     }
+    if (!response.ok) {
+      throw refreshedTokens;
+    }
 
-//     return {
-//       ...token,
-//       accessToken: refreshedTokens.access_token,
-//       expiresAt: Date.now() + refreshedTokens.expires_in * 1000,
-//       refreshToken: refreshedTokens.refresh_token ?? token.refreshToken,
-//     };
-//   } catch (error) {
-//     console.error("Error refreshing access token", error);
-//     return {
-//       ...token,
-//       error: "RefreshAccessTokenError",
-//     };
-//   }
-// }
+    return {
+      ...token,
+      accessToken: refreshedTokens.access_token,
+      expiresAt: Date.now() + refreshedTokens.expires_in * 1000,
+      refreshToken: refreshedTokens.refresh_token ?? token.refreshToken,
+    };
+  } catch (error) {
+    console.error("Error refreshing access token", error);
+    return {
+      ...token,
+      error: "RefreshAccessTokenError",
+    };
+  }
+}
 export const authOptions = {
   providers: [
     SpotifyProvider({
@@ -60,13 +60,14 @@ export const authOptions = {
         token.accessToken = account.access_token;
         token.expiresAt = (account.expires_at as number) * 1000;
         token.refreshToken = account.refresh_token;
+        return token
       }
-      return token;
-      // if (Date.now() < (token.expiresAt as number)) {
-      //   return token;
-      // }
 
-      // return refreshAccessToken(token);
+      if (Date.now() < (token.expiresAt as number)) {
+        return token;
+      }
+
+      return refreshAccessToken(token);
     },
     async session({ session, token }: { session: any; token: JWT }) {
       session.token = token;

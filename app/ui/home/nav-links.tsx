@@ -45,7 +45,7 @@ export default function NavLinks({ isHovered }: NavProps) {
               <p className="hidden md:block">
                 <span
                   className={
-                    "ml-2 overflow-hidden md:inline ml-2 opacity-0 transition-opacity duration-500 group-hover:w-auto group-hover:opacity-100"
+                    "ml-2 overflow-hidden md:inline ml-2 opacity-0 transition-opacity ease-in delay-200 group-hover:duration-500 group-hover:w-auto group-hover:opacity-100"
                   }
                 >
                   {isHovered ? link.name : ""}

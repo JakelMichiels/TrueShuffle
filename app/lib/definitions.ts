@@ -13,7 +13,15 @@ export type Track = {
     width: number,
 }
 
-export type Playlist = {}
+export type Playlist = {
+    name: string, 
+    uri: string,
+    image_url: string, 
+    height: number,
+    width: number,
+    tracks ?: Track[],
+    num_tracks : number
+}
 
 export type Artist = {}
 

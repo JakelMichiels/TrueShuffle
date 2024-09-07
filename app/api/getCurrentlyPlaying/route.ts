@@ -46,7 +46,7 @@ export async function GET() {
         width : data.item.album.images[0].width
     }
 
-    return NextResponse.json(track);
+    return NextResponse.json({message:"response", track: track});
   } catch (error) {
     console.error("Error fetching current track:", error);
     return NextResponse.json(

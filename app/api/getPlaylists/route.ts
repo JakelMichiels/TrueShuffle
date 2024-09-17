@@ -35,7 +35,6 @@ export async function GET() {
 
     let data = await response.json();
 
-    console.log(data.items[2].images)
     
     let playlists: Playlist[] = data.items.map(mapPlaylists);
     

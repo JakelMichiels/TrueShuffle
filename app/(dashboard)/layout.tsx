@@ -5,7 +5,7 @@ export const experimental_ppr = true;
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative flex h-screen md:overflow-hidden">
-      <div className="absolute h-screen w-auto">
+      <div className="absolute h-screen w-auto z-10">
         <div className="group w-full h-full flex-none md:hover:w-64 md:w-14 transition-all hover:duration-500">
           <SideBar />
         </div>

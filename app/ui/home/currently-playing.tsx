@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Track } from "@/app/lib/definitions";
 import Image from "next/image";
 
+
 export default function CurrentlyPlaying() {
   const [currTrack, setCurrTrack] = useState<Track | null>(null);
 

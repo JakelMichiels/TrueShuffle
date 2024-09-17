@@ -40,7 +40,6 @@ export async function GET() {
             },
         link: data.item.external_urls.spotify,
         progress: data.progress_ms,
-        is_playing: data.is_playing,
         image_url: data.item.album.images[0].url,
         height : data.item.album.images[0].height,
         width : data.item.album.images[0].width

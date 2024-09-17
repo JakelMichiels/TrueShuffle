@@ -25,7 +25,7 @@ export default function ContentSwitcher({ children }: ContentSwitcherProps) {
           queue
         </button>
       </div>
-      <div className="flex justify-center border-t border-gray-700 m-2">{children[activeContent]}</div>
+      <div className="flex justify-center border-gray-700 m-2 ">{children[activeContent]}</div>
     </div>
   );
 }
